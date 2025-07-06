@@ -111,15 +111,7 @@ public class DefaultMessageBus implements MessageBus {
         if (messages != null) {
             long now = Instant.now().toEpochMilli();
 
-            // Use iterator to safely remove while iterating
-            Iterator<Message> iterator = messages.iterator();
-
-            while (iterator.hasNext()) {
-                Message storedMessage = iterator.next();
-                if (now - storedMessage.timestamp().toEpochMilli() > retentionMs) {
-                    messages.remove(storedMessage);
-                }
-            }
+            messages.removeIf(storedMessage -> now - storedMessage.timestamp().toEpochMilli() > retentionMs);
         }
     }
 }
