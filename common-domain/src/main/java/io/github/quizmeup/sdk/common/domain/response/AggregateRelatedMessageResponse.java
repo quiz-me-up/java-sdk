@@ -16,23 +16,17 @@ public record AggregateRelatedMessageResponse(String id,
         if (StringUtils.isBlank(name)) throw new BadArgumentException("name cannot be blank");
     }
 
-    public AggregateRelatedMessageResponse(String id, Class<?> clazz, ActionType action){
+    public AggregateRelatedMessageResponse(String id, Class<?> clazz, ActionType action) {
         this(id, clazz.getSimpleName(), action);
     }
 
     @Override
     public String message() {
-        switch (action) {
-            case CREATE -> {
-                return String.format("%s with id %s has been successfully created.", name, id);
-            }
-            case UPDATE -> {
-                return String.format("%s with id %s has been successfully updated.", name, id);
-            }
-            case DELETE -> {
-                return String.format("%s with id %s has been successfully deleted.", name, id);
-            }
-            default -> throw new NotImplementedException("action not implemented");
-        }
+        final String baseMessage = String.format("%s with id %s has been successfully ", name, id);
+        return switch (action()) {
+            case CREATE -> baseMessage + "created.";
+            case UPDATE -> baseMessage + "updated.";
+            case DELETE -> baseMessage + "deleted.";
+        };
     }
 }
