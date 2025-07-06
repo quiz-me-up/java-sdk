@@ -1,0 +1,15 @@
+name: push-on-branch
+
+on:
+  push:
+    branches:
+      - '*'
+      - '!master'
+      - '!gh-pages'
+
+jobs:
+  build-java-sdk:
+    uses: quiz-me-up/reusable-workflow/.github/workflows/java-project.yml@master
+    with:
+      maven_command: 'clean install'
+    secrets: inherit

@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.github.quizmeup</groupId>
+        <artifactId>java-sdk</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <artifactId>common-infrastructure</artifactId>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>1.0</version>
+                <groupId>io.github.quizmeup</groupId>
+                <artifactId>microservice-dependencies</artifactId>
+            </dependency>
+
+            <dependency>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>1.0</version>
+                <groupId>io.github.quizmeup</groupId>
+                <artifactId>event-flow-dependencies</artifactId>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>cors-starter</module>
+        <module>mongo-starter</module>
+        <module>swagger-starter</module>
+        <module>rabbitmq-starter</module>
+        <module>exception-starter</module>
+        <module>properties-starter</module>
+        <module>microservice-parent</module>
+        <module>resource-server-starter</module>
+        <module>password-encoder-starter</module>
+        <module>microservice-dependencies</module>
+    </modules>
+
+</project>
