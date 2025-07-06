@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.ComponentScan;
 
 @AutoConfiguration
-@ComponentScan(basePackageClasses = SpringModelStarter.class)
+@ComponentScan(basePackageClasses = SpringPropertiesStarter.class)
 @EnableConfigurationProperties(value = SecurityProperties.class)
-public class SpringModelStarter {
+public class SpringPropertiesStarter {
 }

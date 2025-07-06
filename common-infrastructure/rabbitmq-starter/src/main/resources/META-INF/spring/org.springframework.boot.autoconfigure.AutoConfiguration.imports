@@ -1,1 +1,1 @@
- io.github.quizmeup.sdk.SpringRabbitMqStarter
+io.github.quizmeup.sdk.common.infrastructure.rabbitmq.starter.SpringRabbitMqStarter
