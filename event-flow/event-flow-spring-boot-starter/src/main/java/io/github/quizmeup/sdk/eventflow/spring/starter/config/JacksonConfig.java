@@ -27,10 +27,10 @@ import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS
 @Configuration
 public class JacksonConfig {
 
-    public final static String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    public final static ZoneId ZONE_ID = ZoneId.systemDefault();
-    public final static ZoneOffset ZONE_OFFSET = ZONE_ID.getRules().getOffset(LocalDateTime.now());
-    public final static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter
+    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final ZoneId ZONE_ID = ZoneId.systemDefault();
+    public static final ZoneOffset ZONE_OFFSET = ZONE_ID.getRules().getOffset(LocalDateTime.now());
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter
             .ofPattern(DATE_FORMAT)
             .withLocale(Locale.FRANCE)
             .withZone(ZONE_ID);

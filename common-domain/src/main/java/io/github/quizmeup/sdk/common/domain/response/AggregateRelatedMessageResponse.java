@@ -1,7 +1,6 @@
 package io.github.quizmeup.sdk.common.domain.response;
 
 import io.github.quizmeup.sdk.eventflow.core.domain.exception.BadArgumentException;
-import io.github.quizmeup.sdk.eventflow.core.domain.exception.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 
 import static java.util.Objects.isNull;
