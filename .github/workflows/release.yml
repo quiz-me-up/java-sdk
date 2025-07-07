@@ -1,9 +1,17 @@
 name: release
 
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release type (major, minor, patch)'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
 
 jobs:
   release:
@@ -13,9 +21,53 @@ jobs:
     steps:
       - name: Checkout project directory
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get previous tag
+        id: tag
+        uses: WyriHaximus/github-action-get-previous-tag@v1
+        with:
+          fallback: '0.0.0'
+
+      - name: Get version
+        id: version
+        uses: WyriHaximus/github-action-next-semvers@v1
+        with:
+          version: ${{ steps.tag.outputs.tag }}
+
+      - name: Select version
+        id: select_version
+        run: |
+          if [ "${{ github.event.inputs.release_type }}" = "major" ]; then
+            echo "version=${{ steps.version.outputs.major }}" >> $GITHUB_OUTPUT
+            echo "full_version=${{ steps.version.outputs.v_major }}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.release_type }}" = "minor" ]; then
+            echo "version=${{ steps.version.outputs.minor }}" >> $GITHUB_OUTPUT
+            echo "full_version=${{ steps.version.outputs.v_minor }}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.release_type }}" = "patch" ]; then
+            echo "version=${{ steps.version.outputs.patch }}" >> $GITHUB_OUTPUT
+            echo "full_version=${{ steps.version.outputs.v_patch }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create new milestone
+        uses: WyriHaximus/github-action-create-milestone@v1
+        with:
+          title: ${{ steps.select_version.outputs.version }}
 
       - name: Setup java-maven
         uses: quiz-me-up/reusable-workflow/.github/actions/setup-java-maven@master
+
+      - name: Update pom.xml versions
+        run: mvn versions:set -DnewVersion=${{ steps.select_version.outputs.version }} -DprocessAllModules=true -DgenerateBackupPoms=false
+
+      - name: Commit
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit --allow-empty -m "ci: bump version to ${{ steps.select_version.outputs.full_version }}"
+          git push origin master
 
       - name: Maven input command execution
         shell: bash
