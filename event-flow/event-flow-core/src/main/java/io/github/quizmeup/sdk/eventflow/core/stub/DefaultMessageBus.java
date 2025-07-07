@@ -7,6 +7,7 @@ import io.github.quizmeup.sdk.eventflow.core.domain.message.Message;
 import io.github.quizmeup.sdk.eventflow.core.domain.topic.Topic;
 import io.github.quizmeup.sdk.eventflow.core.port.MessageBus;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.time.Instant;
 import java.util.Iterator;
@@ -62,8 +63,7 @@ public class DefaultMessageBus implements MessageBus {
         String topicName = topic.name();
 
         // Register the subscriber
-        CopyOnWriteArrayList<MessageSubscriber> subscribers = subscribersByTopic.computeIfAbsent(
-                topicName, k -> new CopyOnWriteArrayList<>());
+        CopyOnWriteArrayList<MessageSubscriber> subscribers = subscribersByTopic.computeIfAbsent(topicName, newTopicName -> new CopyOnWriteArrayList<>());
 
         if (!subscribers.contains(subscriber)) {
             subscribers.add(subscriber);
@@ -84,7 +84,7 @@ public class DefaultMessageBus implements MessageBus {
 
             // Replay stored messages to the new subscriber
             CopyOnWriteArrayList<Message> messages = messagesByTopic.get(topicName);
-            if (messages != null) {
+            if (CollectionUtils.isNotEmpty(messages)) {
                 for (Message storedMessage : messages) {
                     try {
                         subscriber.onNext(storedMessage);

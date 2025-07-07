@@ -3,20 +3,18 @@ package io.github.quizmeup.sdk.eventflow.core.service;
 import io.github.quizmeup.sdk.eventflow.annotation.DomainService;
 import io.github.quizmeup.sdk.eventflow.core.domain.aggregate.Aggregate;
 import io.github.quizmeup.sdk.eventflow.core.domain.aggregate.AggregateLifecycle;
-import io.github.quizmeup.sdk.eventflow.core.domain.message.Event;
 import io.github.quizmeup.sdk.eventflow.core.domain.handler.EventSourcingHandler;
+import io.github.quizmeup.sdk.eventflow.core.domain.message.Event;
 import io.github.quizmeup.sdk.eventflow.core.port.AggregateStore;
 import io.github.quizmeup.sdk.eventflow.core.port.EventStore;
 import io.github.quizmeup.sdk.eventflow.core.port.HandlerRegistry;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicLong;
-
-import static java.util.Objects.isNull;
 
 /**
  * {@code AggregateService} is a domain service responsible for managing the state of aggregates
@@ -77,7 +75,7 @@ public class AggregateService {
         final Collection<Event> events;
 
         if (aggregate.isSnapshotEnabled()) {
-            events = eventStore.findAllByAggregateIdOrderByTimestampAscStartFrom(aggregateId, aggregate.version().intValue());
+            events = eventStore.findAllByAggregateIdOrderByTimestampAscStartFrom(aggregateId, aggregate.version());
         } else {
             events = eventStore.findAllByAggregateIdOrderByTimestampAsc(aggregateId);
         }

@@ -49,7 +49,7 @@ public class MongoEventStore implements EventStore {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Event> findAllByAggregateIdOrderByTimestampAscStartFrom(String aggregateId, int startFrom) {
+    public List<Event> findAllByAggregateIdOrderByTimestampAscStartFrom(String aggregateId, long startFrom) {
         final Query query = new Query(Criteria.where("aggregateId").is(aggregateId))
                 .with(Sort.by(Sort.Direction.ASC, "timestamp"))
                 .skip(startFrom);

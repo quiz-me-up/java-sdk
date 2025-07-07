@@ -41,5 +41,5 @@ public interface EventStore {
      * @param startFrom The position to start retrieving events from
      * @return An Iterable of events for the specified aggregate ID, starting from the specified position
      */
-    Collection<Event> findAllByAggregateIdOrderByTimestampAscStartFrom(String aggregateId, int startFrom);
+    Collection<Event> findAllByAggregateIdOrderByTimestampAscStartFrom(String aggregateId, long startFrom);
 }

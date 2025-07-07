@@ -46,7 +46,7 @@ public class InMemoryEventStore implements EventStore {
     }
 
     @Override
-    public List<Event> findAllByAggregateIdOrderByTimestampAscStartFrom(String aggregateId, int startFrom) {
+    public List<Event> findAllByAggregateIdOrderByTimestampAscStartFrom(String aggregateId, long startFrom) {
         return eventsMap.getOrDefault(aggregateId, new CopyOnWriteArrayList<>())
                 .stream()
                 .sorted(Comparator.comparing(Event::timestamp))
