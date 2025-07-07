@@ -50,11 +50,6 @@ jobs:
             echo "full_version=${{ steps.version.outputs.v_patch }}" >> $GITHUB_OUTPUT
           fi
 
-      - name: Create new milestone
-        uses: WyriHaximus/github-action-create-milestone@v1
-        with:
-          title: ${{ steps.select_version.outputs.version }}
-
       - name: Setup java-maven
         uses: quiz-me-up/reusable-workflow/.github/actions/setup-java-maven@master
 
@@ -72,3 +67,8 @@ jobs:
       - name: Maven input command execution
         shell: bash
         run: mvn -Dmaven.test.skip deploy
+
+      - name: Create new milestone
+        uses: WyriHaximus/github-action-create-milestone@v1
+        with:
+          title: ${{ steps.select_version.outputs.version }}

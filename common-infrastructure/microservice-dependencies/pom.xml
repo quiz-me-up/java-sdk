@@ -9,6 +9,14 @@
     <groupId>io.github.quizmeup</groupId>
     <artifactId>microservice-dependencies</artifactId>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/quiz-me-up/java-sdk</url>
+        </repository>
+    </distributionManagement>
+
     <properties>
         <!-- Centralisation des versions pour une mise à jour facile -->
 
