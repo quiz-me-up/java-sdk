@@ -1,0 +1,45 @@
+name: tag
+
+on:
+  workflow_run:
+    workflows: ["build"]
+    branches: [master]
+    types:
+      - completed
+
+jobs:
+  tag:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project directory
+        uses: actions/checkout@v3
+
+      - name: Get previous tag
+        id: previous
+        uses: 'WyriHaximus/github-action-get-previous-tag@v1'
+        with:
+          fallback: '1.0'
+
+      - name: "Get next version"
+        id: next
+        uses: "WyriHaximus/github-action-next-semvers@v1"
+        with:
+          version: ${{ steps.previous.outputs.tag }}
+
+      - name: Setup java-maven
+        uses: quiz-me-up/reusable-workflow/.github/actions/setup-java-maven@master
+
+      - name: "Update pom.xml versions"
+        run: mvn versions:set -DnewVersion=${{ steps.next.outputs.semver }} -DprocessAllModules=true -DgenerateBackupPoms=false
+
+      - name: "Commit and Tag"
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "ci: bump version to ${{ steps.next.outputs.v_semver }}"
+          git tag ${{ steps.next.outputs.v_semver }}
+      
+      - name: "Push changes"
+        run: git push origin master --follow-tags

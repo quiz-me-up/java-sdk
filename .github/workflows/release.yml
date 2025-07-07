@@ -1,0 +1,22 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.TOKEN }}
+    steps:
+      - name: Checkout project directory
+        uses: actions/checkout@v3
+
+      - name: Setup java-maven
+        uses: quiz-me-up/reusable-workflow/.github/actions/setup-java-maven@master
+
+      - name: Maven input command execution
+        shell: bash
+        run: mvn -Dmaven.test.skip deploy

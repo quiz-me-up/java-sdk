@@ -8,6 +8,19 @@
     <version>1.0</version>
     <packaging>pom</packaging>
 
+    <organization>
+        <name>bettor-league</name>
+        <url>https://github.com/quiz-me-up</url>
+    </organization>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/quiz-me-up/java-sdk</url>
+        </repository>
+    </distributionManagement>
+
     <properties>
         <lombok.version>1.18.34</lombok.version>
         <spring-boot.version>3.5.0</spring-boot.version>
