@@ -29,6 +29,11 @@ jobs:
         with:
           version: ${{ steps.tag.outputs.tag }}
 
+      - name: Debug version outputs
+        run: |
+          echo "semver: ${{ steps.version.outputs.semver }}"
+          echo "v_semver: ${{ steps.version.outputs.v_semver }}"
+
       - name: Setup java-maven
         uses: quiz-me-up/reusable-workflow/.github/actions/setup-java-maven@master
 
