@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.github.quizmeup</groupId>
         <artifactId>event-flow</artifactId>
-        <version>1.0</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>event-flow-spring-boot-rabbitmq-starter</artifactId>
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>io.github.quizmeup</groupId>
             <artifactId>event-flow-core</artifactId>
-            <version>1.0</version>
+            <version>1.0.0</version>
         </dependency>
 
         <dependency>

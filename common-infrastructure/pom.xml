@@ -6,10 +6,10 @@
     <parent>
         <groupId>io.github.quizmeup</groupId>
         <artifactId>java-sdk</artifactId>
-        <version>1.0</version>
+        <version>1.0.0</version>
     </parent>
 
-    <version>1.0</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <artifactId>common-infrastructure</artifactId>
 
@@ -18,7 +18,7 @@
             <dependency>
                 <type>pom</type>
                 <scope>import</scope>
-                <version>1.0</version>
+                <version>1.0.0</version>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>microservice-dependencies</artifactId>
             </dependency>
@@ -26,7 +26,7 @@
             <dependency>
                 <type>pom</type>
                 <scope>import</scope>
-                <version>1.0</version>
+                <version>1.0.0</version>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>event-flow-dependencies</artifactId>
             </dependency>
