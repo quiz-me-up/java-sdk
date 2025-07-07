@@ -23,7 +23,7 @@ jobs:
         with:
           fallback: '1.0.0'
 
-      - name: Get version"
+      - name: Get version
         id: version
         uses: "WyriHaximus/github-action-next-semvers@v1"
         with:
@@ -40,7 +40,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "ci: bump version to ${{ steps.version.outputs.v_semver }}"
+          git commit --allow-empty -m "ci: bump version to ${{ steps.version.outputs.v_semver }}"
           git tag ${{ steps.version.outputs.v_semver }}
       
       - name: Push changes
