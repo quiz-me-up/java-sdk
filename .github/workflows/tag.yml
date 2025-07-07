@@ -23,7 +23,7 @@ jobs:
         id: tag
         uses: 'WyriHaximus/github-action-get-previous-tag@v1'
         with:
-          fallback: '1.0.0'
+          fallback: '0.0.0'
 
       - name: Get version
         id: version
