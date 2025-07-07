@@ -43,7 +43,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit --allow-empty -m "ci: bump version to ${{ steps.version.outputs.v_major }}"
-          git tag ${{ steps.version.outputs.v_major }}
+          git tag -a ${{ steps.version.outputs.v_major }} -m "ci: bump version to ${{ steps.version.outputs.v_major }}"
       
       - name: Push changes
         run: git push origin master --follow-tags

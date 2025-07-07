@@ -36,17 +36,17 @@
             <dependency>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>common-domain</artifactId>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>common-application</artifactId>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>common-infrastructure</artifactId>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

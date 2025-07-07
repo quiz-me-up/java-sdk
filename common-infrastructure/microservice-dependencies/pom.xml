@@ -62,49 +62,49 @@
             <dependency>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>cors-starter</artifactId>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>mongo-starter</artifactId>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>swagger-starter</artifactId>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>rabbitmq-starter</artifactId>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>exception-starter</artifactId>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>properties-starter</artifactId>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>resource-server-starter</artifactId>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>password-encoder-starter</artifactId>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- Dépendances pour Springdoc OpenAPI -->

@@ -23,7 +23,7 @@
         <dependency>
             <groupId>io.github.quizmeup</groupId>
             <artifactId>event-flow-annotation</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
 

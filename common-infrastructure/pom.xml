@@ -18,7 +18,7 @@
             <dependency>
                 <type>pom</type>
                 <scope>import</scope>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>microservice-dependencies</artifactId>
             </dependency>
@@ -26,7 +26,7 @@
             <dependency>
                 <type>pom</type>
                 <scope>import</scope>
-                <version>1.0.0</version>
+                <version>${project.version}</version>
                 <groupId>io.github.quizmeup</groupId>
                 <artifactId>event-flow-dependencies</artifactId>
             </dependency>
