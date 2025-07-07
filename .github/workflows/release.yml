@@ -56,19 +56,21 @@ jobs:
       - name: Update pom.xml versions
         run: mvn versions:set -DnewVersion=${{ steps.select_version.outputs.version }} -DprocessAllModules=true -DgenerateBackupPoms=false
 
-      - name: Commit
+      - name: Create Tag
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit --allow-empty -m "ci: bump version to ${{ steps.select_version.outputs.full_version }}"
-          git push origin master
+          git tag -a ${{ steps.select_version.outputs.full_version }} -m "ci: bump version to ${{ steps.select_version.outputs.full_version }}"
+          git push origin master --follow-tags
 
-      - name: Maven input command execution
+      - name: Create release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ steps.select_version.outputs.full_version }}
+          release_name: Release ${{ steps.select_version.outputs.full_version }}
+
+      - name: Deploy to github packages
         shell: bash
         run: mvn -Dmaven.test.skip deploy
-
-      - name: Create new milestone
-        uses: WyriHaximus/github-action-create-milestone@v1
-        with:
-          title: ${{ steps.select_version.outputs.version }}
