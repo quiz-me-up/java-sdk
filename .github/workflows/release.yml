@@ -29,6 +29,7 @@ jobs:
         uses: quiz-me-up/reusable-workflow/.github/actions/next-version@master
         with:
           release_type: ${{ github.event.inputs.release_type }}
+          fallback_version: '0.0.0'
 
       - name: Setup java-maven
         uses: quiz-me-up/reusable-workflow/.github/actions/setup-java-maven@master
