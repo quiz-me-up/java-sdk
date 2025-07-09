@@ -88,6 +88,12 @@
 
             <dependency>
                 <groupId>io.github.quizmeup</groupId>
+                <artifactId>webflux-swagger-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.quizmeup</groupId>
                 <artifactId>rabbitmq-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
