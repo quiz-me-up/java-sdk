@@ -4,7 +4,6 @@ import io.github.quizmeup.sdk.common.infrastructure.properties.starter.propertie
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
@@ -17,11 +16,6 @@ public class CorsConfiguration {
     @Bean(name = "defaultCorsConfigurationSource")
     public CorsConfigurationSource defaultCorsConfigurationSource() {
         final org.springframework.web.cors.CorsConfiguration configuration = new org.springframework.web.cors.CorsConfiguration();
-        if (CollectionUtils.isEmpty(corsProperties.getAllowedOrigin())) {
-            configuration.addAllowedOrigin("*");
-        } else {
-            configuration.setAllowedOrigins(corsProperties.getAllowedOrigin());
-        }
         configuration.addAllowedOrigin("*");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
