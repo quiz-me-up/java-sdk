@@ -36,11 +36,13 @@
     <modules>
         <module>cors-starter</module>
         <module>mongo-starter</module>
-        <module>swagger-starter</module>
         <module>rabbitmq-starter</module>
         <module>exception-starter</module>
         <module>properties-starter</module>
+        <module>swagger-starter</module>
+        <module>spring-cloud-parent</module>
         <module>microservice-parent</module>
+        <module>webflux-swagger-starter</module>
         <module>resource-server-starter</module>
         <module>password-encoder-starter</module>
         <module>microservice-dependencies</module>

@@ -19,5 +19,4 @@ jobs:
         uses: quiz-me-up/reusable-workflow/.github/actions/setup-java-maven@master
 
       - name: Maven command execution
-        shell: bash
         run: mvn clean install

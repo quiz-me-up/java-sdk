@@ -8,7 +8,6 @@ public interface PageRequest {
 
     SortDetails sort();
 
-
     static PageRequest unpaged() {
         return new DefaultPageRequest(0 ,0 , SortDetails.unSorted());
     }

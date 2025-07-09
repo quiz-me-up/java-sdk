@@ -3,6 +3,7 @@ package io.github.quizmeup.sdk.common.infrastructure.resource.server.starter.con
 import io.github.quizmeup.sdk.common.infrastructure.exception.starter.handler.ForbiddenExceptionHandler;
 import io.github.quizmeup.sdk.common.infrastructure.exception.starter.handler.UnauthorizedExceptionHandler;
 import io.github.quizmeup.sdk.common.infrastructure.properties.starter.properties.SecurityProperties;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,10 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.Collection;
+
+import static java.util.Objects.nonNull;
 
 @Configuration
 @EnableWebSecurity
@@ -40,16 +45,23 @@ public class ResourceServerConfiguration {
 
         // Configuration des autorisations avec lambda
         http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
-            // Configuration des chemins non protégés
-            for (String path : securityProperties.getUnprotectedPath()) {
-                authorizationManagerRequestMatcherRegistry.requestMatchers(path).permitAll();
-            }
+            if (nonNull(securityProperties)) {
 
-            // Configuration conditionnelle selon securityEnabled
-            if (securityProperties.getEnabled()) {
-                authorizationManagerRequestMatcherRegistry.anyRequest().authenticated();
+                if (CollectionUtils.isNotEmpty(securityProperties.getUnprotectedPath())) {
+                    // Configuration des chemins non protégés
+                    for (String path : securityProperties.getUnprotectedPath()) {
+                        authorizationManagerRequestMatcherRegistry.requestMatchers(path).permitAll();
+                    }
+                }
+
+                // Configuration conditionnelle selon securityEnabled
+                if (nonNull(securityProperties.getEnabled()) && securityProperties.getEnabled()) {
+                    authorizationManagerRequestMatcherRegistry.anyRequest().authenticated();
+                } else {
+                    authorizationManagerRequestMatcherRegistry.anyRequest().permitAll();
+                }
             } else {
-                authorizationManagerRequestMatcherRegistry.anyRequest().permitAll();
+                authorizationManagerRequestMatcherRegistry.anyRequest().authenticated();
             }
         });
 
