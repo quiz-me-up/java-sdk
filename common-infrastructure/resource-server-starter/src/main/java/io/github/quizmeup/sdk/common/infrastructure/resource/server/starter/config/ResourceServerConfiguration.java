@@ -3,6 +3,7 @@ package io.github.quizmeup.sdk.common.infrastructure.resource.server.starter.con
 import io.github.quizmeup.sdk.common.infrastructure.exception.starter.handler.ForbiddenExceptionHandler;
 import io.github.quizmeup.sdk.common.infrastructure.exception.starter.handler.UnauthorizedExceptionHandler;
 import io.github.quizmeup.sdk.common.infrastructure.properties.starter.properties.SecurityProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +28,7 @@ import java.util.Optional;
 
 import static java.util.Objects.nonNull;
 
+@Slf4j
 @Configuration
 @EnableWebSecurity
 public class ResourceServerConfiguration {
@@ -53,11 +55,15 @@ public class ResourceServerConfiguration {
                 final Collection<String> unprotectedPaths = Optional.ofNullable(securityProperties)
                         .map(SecurityProperties::getUnprotectedPath)
                         .orElse(Collections.emptyList());
+
                 if (CollectionUtils.isNotEmpty(unprotectedPaths)) {
+                    log.warn("Unprotected paths configured: {}", unprotectedPaths);
                     unprotectedPaths.forEach(path -> authorizationManagerRequestMatcherRegistry.requestMatchers(path).permitAll());
                 }
+
                 authorizationManagerRequestMatcherRegistry.anyRequest().authenticated();
             } else {
+                log.warn("Security is disabled, all requests will be permitted.");
                 authorizationManagerRequestMatcherRegistry.anyRequest().permitAll();
             }
         });
