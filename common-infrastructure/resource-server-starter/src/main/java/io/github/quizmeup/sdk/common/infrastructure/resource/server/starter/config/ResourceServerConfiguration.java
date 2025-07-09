@@ -53,14 +53,14 @@ public class ResourceServerConfiguration {
                 final Collection<String> unprotectedPaths = Optional.ofNullable(securityProperties)
                         .map(SecurityProperties::getUnprotectedPath)
                         .orElse(Collections.emptyList());
-
                 if (CollectionUtils.isNotEmpty(unprotectedPaths)) {
                     unprotectedPaths.forEach(path -> authorizationManagerRequestMatcherRegistry.requestMatchers(path).permitAll());
                 }
+                authorizationManagerRequestMatcherRegistry.anyRequest().authenticated();
+            } else {
+                authorizationManagerRequestMatcherRegistry.anyRequest().permitAll();
             }
-            authorizationManagerRequestMatcherRegistry.anyRequest().authenticated();
         });
-
 
         // Configuration de la gestion des exceptions
         http.exceptionHandling(exceptionHandlingConfigurer ->
