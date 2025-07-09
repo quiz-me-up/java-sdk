@@ -22,6 +22,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
 
 import static java.util.Objects.nonNull;
 
@@ -42,28 +44,23 @@ public class ResourceServerConfiguration {
                                                    final ForbiddenExceptionHandler forbiddenExceptionHandler,
                                                    final UnauthorizedExceptionHandler unauthorizedExceptionHandler,
                                                    @Qualifier("defaultCorsConfigurationSource") final CorsConfigurationSource corsConfigurationSource) throws Exception {
+        final boolean isSecurityEnabled = Optional.ofNullable(securityProperties)
+                .map(SecurityProperties::getEnabled)
+                .orElse(true);
 
-        // Configuration des autorisations avec lambda
         http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
-            if (nonNull(securityProperties)) {
+            if (isSecurityEnabled) {
+                final Collection<String> unprotectedPaths = Optional.ofNullable(securityProperties)
+                        .map(SecurityProperties::getUnprotectedPath)
+                        .orElse(Collections.emptyList());
 
-                if (CollectionUtils.isNotEmpty(securityProperties.getUnprotectedPath())) {
-                    // Configuration des chemins non protégés
-                    for (String path : securityProperties.getUnprotectedPath()) {
-                        authorizationManagerRequestMatcherRegistry.requestMatchers(path).permitAll();
-                    }
+                if (CollectionUtils.isNotEmpty(unprotectedPaths)) {
+                    unprotectedPaths.forEach(path -> authorizationManagerRequestMatcherRegistry.requestMatchers(path).permitAll());
                 }
-
-                // Configuration conditionnelle selon securityEnabled
-                if (nonNull(securityProperties.getEnabled()) && securityProperties.getEnabled()) {
-                    authorizationManagerRequestMatcherRegistry.anyRequest().authenticated();
-                } else {
-                    authorizationManagerRequestMatcherRegistry.anyRequest().permitAll();
-                }
-            } else {
-                authorizationManagerRequestMatcherRegistry.anyRequest().authenticated();
             }
+            authorizationManagerRequestMatcherRegistry.anyRequest().authenticated();
         });
+
 
         // Configuration de la gestion des exceptions
         http.exceptionHandling(exceptionHandlingConfigurer ->

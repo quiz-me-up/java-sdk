@@ -17,7 +17,6 @@ public class CorsConfiguration {
     public CorsConfigurationSource defaultCorsConfigurationSource() {
         final org.springframework.web.cors.CorsConfiguration configuration = new org.springframework.web.cors.CorsConfiguration();
         configuration.addAllowedOrigin("*");
-        configuration.addAllowedOrigin("*");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.setMaxAge(3600L);
