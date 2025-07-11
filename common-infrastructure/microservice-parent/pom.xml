@@ -43,7 +43,6 @@
         <dependency>
             <groupId>io.github.quizmeup</groupId>
             <artifactId>swagger-starter</artifactId>
-            <version>1.0.1</version>
         </dependency>
 
         <dependency>

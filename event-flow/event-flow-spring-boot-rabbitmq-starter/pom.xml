@@ -17,34 +17,30 @@
         <dependency>
             <groupId>io.github.quizmeup</groupId>
             <artifactId>event-flow-core</artifactId>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
             <version>${spring-boot.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <version>${spring-boot.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.amqp</groupId>
             <artifactId>spring-rabbit</artifactId>
-            <version>3.2.4</version>
+            <version>3.2.5</version>
         </dependency>
 
         <dependency>

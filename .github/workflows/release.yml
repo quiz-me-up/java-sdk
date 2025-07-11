@@ -37,7 +37,7 @@ jobs:
       - name: Update pom.xml versions
         run: |
           mvn versions:set -DnewVersion=${{ steps.next_version.outputs.version }} -DprocessAllModules=true -DgenerateBackupPoms=false
-          mvn versions:update-property -Dproperty=sdk.version -DnewVersion=${{ steps.next_version.outputs.version }}
+          mvn versions:update-property -Dproperty=sdk.version -DnewVersion=${{ steps.next_version.outputs.version }} -DgenerateBackupPoms=false
 
       - name: Create Tag
         run: |
