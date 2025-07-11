@@ -10,20 +10,22 @@
         <version>1.0.1</version>
     </parent>
 
+    <version>1.0.1</version>
+    <packaging>jar</packaging>
     <artifactId>event-flow-spring-boot-mongo-starter</artifactId>
 
     <dependencies>
-
         <dependency>
             <groupId>io.github.quizmeup</groupId>
             <artifactId>event-flow-core</artifactId>
-            <version>${project.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>io.github.quizmeup</groupId>
             <artifactId>event-flow-spring-boot-starter</artifactId>
-            <version>${project.version}</version>
+            <version>1.0.1</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
@@ -37,6 +39,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
             <version>${spring-boot.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

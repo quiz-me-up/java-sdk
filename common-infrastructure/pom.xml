@@ -13,26 +13,6 @@
     <packaging>pom</packaging>
     <artifactId>common-infrastructure</artifactId>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <type>pom</type>
-                <scope>import</scope>
-                <version>${project.version}</version>
-                <groupId>io.github.quizmeup</groupId>
-                <artifactId>microservice-dependencies</artifactId>
-            </dependency>
-
-            <dependency>
-                <type>pom</type>
-                <scope>import</scope>
-                <version>${project.version}</version>
-                <groupId>io.github.quizmeup</groupId>
-                <artifactId>event-flow-dependencies</artifactId>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <modules>
         <module>cors-starter</module>
         <module>mongo-starter</module>
@@ -45,7 +25,5 @@
         <module>webflux-swagger-starter</module>
         <module>resource-server-starter</module>
         <module>password-encoder-starter</module>
-        <module>microservice-dependencies</module>
     </modules>
-
 </project>

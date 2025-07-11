@@ -43,6 +43,7 @@
         <dependency>
             <groupId>io.github.quizmeup</groupId>
             <artifactId>swagger-starter</artifactId>
+            <version>1.0.1</version>
         </dependency>
 
         <dependency>
@@ -68,11 +69,6 @@
         <dependency>
             <groupId>io.github.quizmeup</groupId>
             <artifactId>mongo-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.quizmeup</groupId>
-            <artifactId>common-domain</artifactId>
         </dependency>
 
         <dependency>

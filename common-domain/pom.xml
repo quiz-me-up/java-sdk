@@ -10,13 +10,15 @@
         <version>1.0.1</version>
     </parent>
 
+    <version>1.0.1</version>
+    <packaging>jar</packaging>
     <artifactId>common-domain</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>io.github.quizmeup</groupId>
             <artifactId>event-flow-core</artifactId>
-            <version>${project.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

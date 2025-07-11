@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Component
 public class AuditConfiguration implements AuditorAware<String> {
-
     @NonNull
     @Override
     public Optional<String> getCurrentAuditor() {

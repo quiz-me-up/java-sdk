@@ -14,16 +14,11 @@
     <packaging>pom</packaging>
     <artifactId>event-flow</artifactId>
 
-    <properties>
-        <jackson.version>2.19.0</jackson.version>
-    </properties>
-
     <modules>
         <module>event-flow-annotation</module>
         <module>event-flow-core</module>
         <module>event-flow-spring-boot-starter</module>
         <module>event-flow-spring-boot-mongo-starter</module>
         <module>event-flow-spring-boot-rabbitmq-starter</module>
-        <module>event-flow-dependencies</module>
     </modules>
 </project>

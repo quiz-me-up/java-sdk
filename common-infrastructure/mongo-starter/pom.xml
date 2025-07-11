@@ -9,6 +9,8 @@
         <version>1.0.1</version>
     </parent>
 
+    <version>1.0.1</version>
+    <packaging>jar</packaging>
     <artifactId>mongo-starter</artifactId>
 
     <dependencies>
@@ -32,6 +34,7 @@
         <dependency>
             <groupId>io.github.quizmeup</groupId>
             <artifactId>event-flow-spring-boot-mongo-starter</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
