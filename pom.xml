@@ -22,7 +22,7 @@
     </distributionManagement>
 
     <properties>
-        <sdk.version>1.0.1</sdk.version>
+        <sdk.version>1.0.0</sdk.version>
 
         <!-- Versions de Spring Boot et Spring Cloud -->
         <spring-boot.version>3.5.0</spring-boot.version>
