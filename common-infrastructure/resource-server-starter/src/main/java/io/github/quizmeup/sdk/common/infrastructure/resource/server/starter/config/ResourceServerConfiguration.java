@@ -52,18 +52,20 @@ public class ResourceServerConfiguration {
 
         http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
             if (isSecurityEnabled) {
+                log.debug("Security is enabled, configuring request matchers.");
+
                 final Collection<String> unprotectedPaths = Optional.ofNullable(securityProperties)
                         .map(SecurityProperties::getUnprotectedPath)
                         .orElse(Collections.emptyList());
 
                 if (CollectionUtils.isNotEmpty(unprotectedPaths)) {
-                    log.warn("Unprotected paths configured: {}", unprotectedPaths);
+                    log.debug("Unprotected paths configured: {}", unprotectedPaths);
                     unprotectedPaths.forEach(path -> authorizationManagerRequestMatcherRegistry.requestMatchers(path).permitAll());
                 }
 
                 authorizationManagerRequestMatcherRegistry.anyRequest().authenticated();
             } else {
-                log.warn("Security is disabled, all requests will be permitted.");
+                log.debug("Security is disabled, all requests will be permitted.");
                 authorizationManagerRequestMatcherRegistry.anyRequest().permitAll();
             }
         });

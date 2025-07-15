@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.github.quizmeup.sdk.eventflow.spring.starter.jackson.InstantDeserializer;
 import io.github.quizmeup.sdk.eventflow.spring.starter.jackson.InstantSerializer;
+import io.github.quizmeup.sdk.eventflow.spring.starter.jackson.LocalDateTimeDeserializer;
 import io.github.quizmeup.sdk.eventflow.spring.starter.jackson.LocalDateTimeSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,13 +47,16 @@ public class JacksonConfig {
         objectMapper.disable(FAIL_ON_UNKNOWN_PROPERTIES);
         objectMapper.disable(FAIL_ON_IGNORED_PROPERTIES);
 
-        DateFormat defaultDateFormat = new SimpleDateFormat(DATE_FORMAT);
+        DateFormat defaultDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         objectMapper.setDateFormat(defaultDateFormat);
 
         SimpleModule module = new SimpleModule();
         module.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
+        module.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
+
         module.addSerializer(Instant.class, new InstantSerializer());
         module.addDeserializer(Instant.class, new InstantDeserializer());
+
         objectMapper.registerModule(module);
 
         return objectMapper;
