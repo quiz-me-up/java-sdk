@@ -47,7 +47,7 @@ public class JacksonConfig {
         objectMapper.disable(FAIL_ON_UNKNOWN_PROPERTIES);
         objectMapper.disable(FAIL_ON_IGNORED_PROPERTIES);
 
-        DateFormat defaultDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat defaultDateFormat = new SimpleDateFormat(DATE_FORMAT);
         objectMapper.setDateFormat(defaultDateFormat);
 
         SimpleModule module = new SimpleModule();
