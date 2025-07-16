@@ -7,10 +7,10 @@
     <parent>
         <groupId>io.github.quizmeup</groupId>
         <artifactId>common-infrastructure</artifactId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.0.5</version>
     </parent>
 
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.5</version>
     <packaging>jar</packaging>
     <artifactId>password-encoder-starter</artifactId>
 
