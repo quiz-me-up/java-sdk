@@ -53,6 +53,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <modules>
+        <module>event-flow</module>
+        <module>common-domain</module>
+        <module>common-application</module>
+        <module>common-infrastructure</module>
+    </modules>
+
     <dependencyManagement>
         <dependencies>
             <!-- Import du "Bill of Materials" (BOM) de Spring Cloud -->
@@ -196,13 +203,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <modules>
-        <module>event-flow</module>
-        <module>common-domain</module>
-        <module>common-application</module>
-        <module>common-infrastructure</module>
-    </modules>
 
     <build>
         <pluginManagement>
