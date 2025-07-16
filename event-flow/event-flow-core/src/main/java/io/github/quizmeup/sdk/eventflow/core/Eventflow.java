@@ -29,7 +29,8 @@ import java.util.Optional;
  * @param commandGateway Gateway for sending commands
  * @param handlerService Service for registering handlers
  */
-public record Eventflow(ScanObject scanObject,
+public record Eventflow(ScanClass scanClass,
+                        ScanObject scanObject,
                         ScanPackage scanPackage,
                         SendQuery queryGateway,
                         SendEvent eventGateway,
@@ -151,6 +152,7 @@ public record Eventflow(ScanObject scanObject,
             final HandlerService handlerService = new HandlerService(topicService, handlerRegistry, eventDispatcher, queryDispatcher, commandDispatcher);
 
             return new Eventflow(
+                    handlerService,
                     handlerService,
                     handlerService,
                     queryGateway,

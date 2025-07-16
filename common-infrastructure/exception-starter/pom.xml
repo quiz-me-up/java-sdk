@@ -7,10 +7,10 @@
     <parent>
         <groupId>io.github.quizmeup</groupId>
         <artifactId>common-infrastructure</artifactId>
-        <version>1.0.3</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
 
-    <version>1.0.3</version>
+    <version>1.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
     <artifactId>exception-starter</artifactId>
 
@@ -45,4 +45,6 @@
             <artifactId>tomcat-embed-core</artifactId>
         </dependency>
     </dependencies>
+
+
 </project>

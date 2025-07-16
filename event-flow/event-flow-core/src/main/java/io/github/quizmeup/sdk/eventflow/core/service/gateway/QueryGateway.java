@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
 /**
  * {@code QueryGateway} is a domain service that acts as a gateway for sending queries to the system.
  * It implements the {@link SendQuery} interface and uses a {@link MessageBus} for sending and receiving query messages.
- * It provides a method to asynchronously send a query and obtain its result via a {@link CompletableFuture}.
+ * It provides a method to asynchronously send a query and get its result via a {@link CompletableFuture}.
  */
 @Slf4j
 @DomainService

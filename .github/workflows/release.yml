@@ -37,14 +37,18 @@ jobs:
       - name: Update pom.xml versions
         run: |
           mvn versions:set -DnewVersion=${{ steps.next_version.outputs.version }} -DprocessAllModules=true -DgenerateBackupPoms=false
+          mvn versions:update-property -Dproperty=sdk.version -DnewVersion=${{ steps.next_version.outputs.version }}
 
-      - name: Create Tag
+      - name: Git configuration
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create Tag
+        run: |
           git add .
           git commit --allow-empty -m "release ${{ steps.next_version.outputs.full_version }}"
-          git tag -a ${{ steps.next_version.outputs.full_version }} -m "release ${{ steps.next_version.outputs.full_version }}"
+          git tag -a ${{ steps.next_version.outputs.full_version }} -m "release: ${{ steps.next_version.outputs.full_version }}"
           git push origin master --follow-tags
 
       - name: Create release
@@ -55,3 +59,14 @@ jobs:
 
       - name: Deploy to github packages
         run: mvn -Dmaven.test.skip deploy
+
+      - name: Update pom.xml versions
+        run: |
+          mvn versions:set -DnewVersion=${{ steps.next_version.outputs.version }}-SNAPSHOT -DprocessAllModules=true -DgenerateBackupPoms=false
+          mvn versions:update-property -Dproperty=sdk.version -DnewVersion=${{ steps.next_version.outputs.version }}-SNAPSHOT
+
+      - name: Commit snapshot version
+        run: |
+          git add .
+          git commit --allow-empty -m "development train: ${{ steps.next_version.outputs.version }}-SNAPSHOT"
+          git push origin master

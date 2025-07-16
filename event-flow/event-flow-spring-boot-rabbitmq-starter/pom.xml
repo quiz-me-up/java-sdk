@@ -6,10 +6,10 @@
     <parent>
         <groupId>io.github.quizmeup</groupId>
         <artifactId>event-flow</artifactId>
-        <version>1.0.3</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
 
-    <version>1.0.3</version>
+    <version>1.0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
     <artifactId>event-flow-spring-boot-rabbitmq-starter</artifactId>
 

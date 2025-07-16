@@ -22,10 +22,10 @@ public interface MessageGateway<MESSAGE extends Message> extends MessagePublishe
     default CompletableFuture<MessageResult> sendMessage(MESSAGE message) {
         logMessageSent(message);
         publish(message);
-        return waitForResponse(message);
+        return waitForResult(message);
     }
 
-    private CompletableFuture<MessageResult> waitForResponse(MESSAGE message) {
+    private CompletableFuture<MessageResult> waitForResult(MESSAGE message) {
         CompletableFuture<MessageResult> future = new CompletableFuture<>();
         subscribeToResults(message, future);
         handleTimeout(message, future);

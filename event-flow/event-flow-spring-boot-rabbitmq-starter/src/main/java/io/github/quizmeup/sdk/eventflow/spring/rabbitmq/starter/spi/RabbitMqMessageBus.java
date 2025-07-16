@@ -24,7 +24,7 @@ public class RabbitMqMessageBus implements MessageBus {
     @Override
     public void publish(Message message) {
         final String topicName = message.topic().name();
-        // Send to the exchange with the topic name, with an empty routing key since it's a fanout exchange
+        // Send it to the exchange with the topic name, with an empty routing key since it's a fanout exchange
         rabbitTemplate.convertAndSend(topicName, "", message);
     }
 

@@ -7,6 +7,7 @@ import io.github.quizmeup.sdk.eventflow.annotation.EventSourcingHandler;
 import io.github.quizmeup.sdk.eventflow.annotation.QueryHandler;
 import io.github.quizmeup.sdk.eventflow.core.domain.topic.MessageResultTopic;
 import io.github.quizmeup.sdk.eventflow.core.usecase.RegisterHandler;
+import io.github.quizmeup.sdk.eventflow.core.usecase.ScanClass;
 import io.github.quizmeup.sdk.eventflow.core.usecase.ScanObject;
 import io.github.quizmeup.sdk.eventflow.core.usecase.ScanPackage;
 import io.github.quizmeup.sdk.eventflow.core.domain.exception.BadArgumentException;
@@ -37,7 +38,7 @@ import static java.util.Objects.isNull;
  */
 @Slf4j
 @DomainService
-public class HandlerService implements RegisterHandler, ScanPackage, ScanObject {
+public class HandlerService implements RegisterHandler, ScanPackage, ScanObject, ScanClass {
     private final HandlerRegistry handlerRegistry;
 
     private final EventDispatcher eventDispatcher;
@@ -111,6 +112,19 @@ public class HandlerService implements RegisterHandler, ScanPackage, ScanObject 
     }
 
 
+    @Override
+    public Collection<Handler> scan(Class<?> clazz) {
+        final List<Handler> handlers = new ArrayList<>();
+
+        if (isNotInterfaceOrAbstract(clazz)) {
+            tryCreateInstance(clazz)
+                    .map(this::scan)
+                    .ifPresent(handlers::addAll);
+        }
+
+        return handlers;
+    }
+
     /**
      * Scans an object instance for methods annotated with {@link EventHandler}, {@link QueryHandler}, {@link CommandHandler},
      * or {@link EventSourcingHandler} and creates corresponding handlers.
@@ -182,7 +196,8 @@ public class HandlerService implements RegisterHandler, ScanPackage, ScanObject 
             }
 
             for (File directory : dirs) {
-                handlers.addAll(findHandlers(directory, packageName));
+                final Collection<Handler> handlerCollection = findHandlers(directory, packageName);
+                handlers.addAll(handlerCollection);
             }
 
         } catch (IOException ignored) {
@@ -242,9 +257,8 @@ public class HandlerService implements RegisterHandler, ScanPackage, ScanObject 
 
             try {
                 final Class<?> clazz = Class.forName(className);
-                if (isNotInterfaceOrAbstract(clazz)) {
-                    tryCreateInstance(clazz).ifPresent(instance -> handlers.addAll(scan(instance)));
-                }
+                final Collection<Handler> handlerCollection = scan(clazz);
+                handlers.addAll(handlerCollection);
             } catch (ClassNotFoundException ignored) {
                 // Log this, even if ignored
                 log.warn("Class not found: {}", className);

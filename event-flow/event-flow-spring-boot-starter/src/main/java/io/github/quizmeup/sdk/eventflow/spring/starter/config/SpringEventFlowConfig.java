@@ -30,7 +30,7 @@ public class SpringEventFlowConfig {
     }
 
     @Bean
-    @ConditionalOnMissingBean(EventStore.class)
+    @ConditionalOnMissingBean(AggregateStore.class)
     public AggregateStore aggregateStore() {
         return new InMemoryAggregateStore();
     }
