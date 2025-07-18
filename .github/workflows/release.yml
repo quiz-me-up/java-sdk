@@ -42,11 +42,12 @@ jobs:
       - name: Deploy to github packages
         run: mvn clean deploy
 
-      - name: Generate changelog
+      - name: Create changelog
         id: changelog
-        uses: quiz-me-up/reusable-workflow/.github/actions/generate-changelog@master
+        uses: requarks/changelog-action@v1
         with:
-          next_version: ${{ steps.next_version.outputs.full_version }}
+          token: ${{ secrets.QUIZ_ME_UP_GITHUB_TOKEN }}
+          tag: ${{ steps.next_version.outputs.previous_tag }}
 
       - name: Setup git bot user
         uses: quiz-me-up/reusable-workflow/.github/actions/setup-git-bot-user@master
@@ -63,5 +64,5 @@ jobs:
         with:
           tag_name: ${{ steps.next_version.outputs.full_version }}
           name: Release ${{ steps.next_version.outputs.full_version }}
-          body: ${{ steps.changelog.outputs.changelog }}
+          body: ${{ steps.changelog.outputs.changes }}
 
