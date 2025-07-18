@@ -20,7 +20,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.QUIZ_ME_UP_GITHUB_TOKEN }}
     steps:
       - name: Checkout project directory
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -29,7 +29,6 @@ jobs:
         uses: quiz-me-up/reusable-workflow/.github/actions/next-version@master
         with:
           release_type: ${{ github.event.inputs.release_type }}
-          fallback_version: '0.0.0'
 
       - name: Setup java-maven
         uses: quiz-me-up/reusable-workflow/.github/actions/setup-java-maven@master
@@ -39,10 +38,17 @@ jobs:
           mvn versions:set -DnewVersion=${{ steps.next_version.outputs.version }} -DprocessAllModules=true -DgenerateBackupPoms=false
           mvn versions:update-property -Dproperty=sdk.version -DnewVersion=${{ steps.next_version.outputs.version }} -DprocessAllModules=true -DgenerateBackupPoms=false
 
-      - name: Git configuration
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Deploy to github packages
+        run: mvn clean deploy
+
+      - name: Generate changelog
+        id: changelog
+        uses: quiz-me-up/reusable-workflow/.github/actions/generate-changelog@master
+        with:
+          next_version: ${{ steps.next_version.outputs.full_version }}
+
+      - name: Setup git bot user
+        uses: quiz-me-up/reusable-workflow/.github/actions/setup-git-bot-user@master
 
       - name: Create Tag
         run: |
@@ -56,6 +62,5 @@ jobs:
         with:
           tag_name: ${{ steps.next_version.outputs.full_version }}
           name: Release ${{ steps.next_version.outputs.full_version }}
+          body: ${{ steps.changelog.outputs.changelog }}
 
-      - name: Deploy to github packages
-        run: mvn clean deploy
