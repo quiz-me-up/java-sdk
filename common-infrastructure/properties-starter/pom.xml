@@ -7,11 +7,11 @@
     <parent>
         <groupId>io.github.quizmeup</groupId>
         <artifactId>common-infrastructure</artifactId>
-        <version>1.0.6</version>
+        <version>1.0.7</version>
     </parent>
 
     <packaging>jar</packaging>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <artifactId>properties-starter</artifactId>
 
     <dependencies>

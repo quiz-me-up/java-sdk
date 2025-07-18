@@ -7,10 +7,10 @@
     <parent>
         <groupId>io.github.quizmeup</groupId>
         <artifactId>java-sdk</artifactId>
-        <version>1.0.6</version>
+        <version>1.0.7</version>
     </parent>
 
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <packaging>jar</packaging>
     <artifactId>common-domain</artifactId>
 
